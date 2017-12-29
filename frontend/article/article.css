@@ -1,0 +1,158 @@
+.edition-toggle {
+	background: none;
+	outline: none;
+	border: none;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	padding: 8px 15px;
+	font-family: Lato;
+	margin-bottom: 15px;
+	float: right;
+	clear: both;
+	color: #444444;
+	cursor: pointer;
+}
+
+.edition-toggle.editing {
+	background: #00c4a6;
+	color: white;
+	border-color: transparent;
+	font-weight: bold;
+}
+
+.article-list {
+	clear: both;
+}
+
+.article {
+	display: none;
+}
+
+.paragraphe {
+	position: relative;
+	display: flex;
+	align-items: center;
+	background: white;
+	border: 1px solid lightgray;
+	margin-bottom: 25px;
+}
+
+.paragraphe.focus {
+	border-width: 2px;
+	margin-bottom: 23px;
+	border-color: #00c4a6;
+	left: -1px;
+	top: -1px;
+}
+
+.content {
+	flex: 1;
+	padding: 15px 15px 15px 0;
+}
+
+textarea.content-editor {
+	background: transparent;
+	flex: 1;
+	padding: 15px 15px 15px 0;
+	display: none;
+	border: none;
+	font-family: Roboto;
+	font-size: 1em;
+}
+
+textarea.new-paragraphe {
+	position: relative;
+	width: 100%;
+	padding: 15px 15px 15px 40px;
+	display: none;
+	border: none;
+	font-family: Roboto;
+	font-size: 1em;
+	background: white;
+	border: 1px solid lightgray;
+	margin-bottom: 25px;
+}
+
+textarea.new-paragraphe:focus {
+	outline: none;
+	border-width: 2px;
+	margin-bottom: 23px;
+	border-color: #00c4a6;
+	left: -1px;
+	top: -1px;
+}
+
+textarea.content-editor:focus {
+	outline: none;
+}
+
+.handle {
+	padding: 15px;
+	cursor: -webkit-grab;
+}
+
+.paragraphe.focus .cross:hover {
+	border-left: none;
+}
+
+.cross {
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 16px;
+	text-align: center;
+	background: white;
+	border-radius: 50%;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid lightgray;
+	transform: translateX(50%) translateY(-50%) rotate(-45deg);
+	color: gray;
+}
+
+.paragraphe:hover .cross {
+	display: block;
+}
+
+.cross:hover {
+	background: #00c4a6;
+	border: none;
+	color: white;
+}
+
+.cross > i {
+	transform: rotate(45deg);
+}
+
+.focus .cross {
+	border-left: 2px solid #00c4a6;
+}
+
+.section-ajout.paragraphe {
+	padding-left: 40px;
+}
+
+.section-ajout.paragraphe > textarea.content-editor {
+	display: block;
+}
+
+.section-ajout > button {
+	border: none;
+	background: white;
+	color: gray;
+	font-size: 20px;
+	padding: 0 20px;
+	align-self: stretch;
+	border-left: 1px solid lightgray;
+}
+
+.section-ajout > button:hover {
+	background: #00c4a6;
+	border: none;
+	color: white;
+}
+
+.section-ajout > button:focus {
+	outline: none;
+}

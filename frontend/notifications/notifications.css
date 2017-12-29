@@ -1,0 +1,36 @@
+.notification-feed {
+	position: fixed;
+	z-index: 100;
+	right: 0;
+	top: 0;
+}
+
+.notification {
+	display: none;
+	margin: 15px;
+	padding: 15px;
+	color: white;
+	width: 400px;
+}
+
+.notification.success {
+	background: #00c4a6;
+}
+
+.notification.error {
+	background: rgb(204, 69, 69);
+}
+
+.notification h3 {
+	margin: 0;
+	margin-bottom: 5px;
+}
+
+.notification p {
+	margin: 0;
+}
+
+.notification .close {
+	float: right;
+	cursor: pointer;
+}

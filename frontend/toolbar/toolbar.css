@@ -1,0 +1,88 @@
+.menu-bar {
+	background: white;
+	margin: -33px;
+	margin-bottom: 15px;
+	border-bottom: solid 1px lightgray;
+	padding: 10px 33px;
+}
+
+.menu-bar select {
+	flex: 1;
+	background: none;
+	border: none;
+	font-size: 16px;
+	padding: 10px 15px;
+}
+
+.menu-bar .selector .label {
+	background: #f0f0f0;
+	padding: 10px 15px;
+	font-weight: bold;
+	color: gray;
+}
+
+.menu-bar .selector {
+	display: flex;
+	border: 1px solid lightgray;
+	font-family: Roboto;
+}
+
+.menu-bar select:focus {
+	outline: none;
+}
+
+.button {
+	padding: 5 15px;
+	background: #f0f0f0;
+	border: none;
+	color: gray;
+}
+
+.button:active,
+.button:focus {
+	outline: none;
+}
+
+.button:hover {
+	background: #00c4a6;
+	border: none;
+	color: white;
+}
+
+.placeholder {
+	text-align: center;
+	color: #aaa;
+}
+
+.placeholder > .fa {
+	font-size: 64px;
+}
+
+.modal {
+	display: none;
+	align-items: center;
+	z-index: 100;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+.modal .content {
+	display: flex;
+	margin: auto;
+	max-width: 500px;
+}
+
+.modal .content input {
+	font-family: Roboto;
+	flex: 1;
+	padding: 10px 15px;
+	border: none;
+}
+
+.modal .content input:focus {
+	outline: none;
+}

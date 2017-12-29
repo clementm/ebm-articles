@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>Articles</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto|Open Sans" rel="stylesheet">
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+      <div class="modal">
+        <div class="content">
+          <input type="text" id="article-title"/>
+          <button class="article-submit button">Créer</button>
+        </div>
+      </div>
+
+      <div class="menu-bar">
+        <div class="selector">
+          <div class="label">Article</div>
+          <select id="article-select">
+            <option disabled selected>Sélectionnez un article...</option>
+          </select>
+          <button class="button" id="modal-open"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <div class="notification-feed">
+          <div class="notification error">
+              <span class="close"><i class="fa fa-times"></i></span>
+              <h3><i class="fa fa-${type === Types.SUCCESS
+                ? 'check-square-o'
+                : 'exclamation-triangle'}" aria-hidden="true"></i> ${titre}</h3>
+              <p>${message}</p>
+            </div>
+      </div>
+
+      <div class="placeholder">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        <h3>Sélectionnez ou créez un nouvel article pour commencer</h3>
+      </div>
+
+      <div class="article">
+        <button class="edition-toggle">Mode édition</button>
+        <div class="article-list"></div>
+        <div class="paragraphe section-ajout">
+          <textarea rows="1" class="content-editor" placeholder="Ajouter un nouveau paragraphe... (&crarr; pour valider)"></textarea>
+          <button class="submit-button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <script type="text/javascript" src="/bundle.js"></script>
+  </body>
+</html>
