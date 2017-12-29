@@ -1,14 +1,14 @@
 import NotificationCenter, { Types } from '_services/notifications';
 
-function pushError() {
+function pushError(message) {
 	NotificationCenter.emit(
 		Types.ERROR,
 		'Oups !...',
 		`
-		Impossible de récupérer vos paragraphes... vérifiez que vous êtes bien connecté à internet,
-		que le réseau de l'école fonctionne, et qu\'une apocalypse n'est pas en cours. Sinon, 
-		réessayez plus tard.
-	`,
+			Impossible de récupérer vos paragraphes... vérifiez que vous êtes bien connecté à internet,
+			que le réseau de l'école fonctionne, et qu\'une apocalypse n'est pas en cours. Sinon, 
+			réessayez plus tard. ${message ? `Erreur obtenue : ${message}` : ''}
+		`,
 		10000
 	);
 }
@@ -23,14 +23,12 @@ const post = (url, data, callback) =>
 			} else pushError();
 		},
 		'json'
-	).fail(function() {
-		pushError();
-	});
+	).fail((oRep) => pushError(oRep.responseJSON && oRep.responseJSON.error));
 
 const del = (url, callback) =>
-	$.ajax(url, { method: 'delete' }).done((oRep) => callback()).fail(function() {
-		pushError();
-	});
+	$.ajax(url, { method: 'delete' })
+		.done((oRep) => callback())
+		.fail((oRep) => pushError(oRep.responseJSON && oRep.responseJSON.error));
 
 export default {
 	ajouterParagraphe: function(paragraphe, callback) {
@@ -46,17 +44,17 @@ export default {
 	},
 
 	listerArticles: function(callback) {
-		$.getJSON('/api/articles', function(oRep) {
+		$.getJSON('/api/articles', (oRep) => {
 			if (!oRep.data) pushError();
 			else callback(oRep.data);
-		});
+		}).fail((oRep) => pushError(oRep.responseJSON && oRep.responseJSON.error));
 	},
 
 	getArticle: function(id, callback) {
-		$.getJSON('/api/articles/' + id, function(oRep) {
+		$.getJSON('/api/articles/' + id, (oRep) => {
 			if (!oRep.data) pushError();
 			else callback(oRep.data);
-		});
+		}).fail((oRep) => pushError(oRep.responseJSON && oRep.responseJSON.error));
 	},
 
 	creerArticle: function(title, callback) {
