@@ -9,6 +9,11 @@ const match = (pattern, location, callback) => {
 	if (result) callback(result);
 };
 
+/**
+ * Les composants utilisent cette méthode pour écouter une route particulière
+ * @param {*} patternStr motif de la route avec les placeholder des paramètres
+ * @param {*} callback méthode à rappeler lorsque la route est activée
+ */
 export const Route = (patternStr, callback) => {
 	const pattern = new UrlPattern(patternStr);
 	// trigger callback with current route, outside loading loop

@@ -1,5 +1,9 @@
 import NotificationCenter, { Types } from '_services/notifications';
 
+/**
+ * Permet d'envoyer une erreur au centre de notification
+ * @param {*} message message de l'erreur
+ */
 function pushError(message) {
 	NotificationCenter.emit(
 		Types.ERROR,
@@ -13,6 +17,12 @@ function pushError(message) {
 	);
 }
 
+/**
+ * Requête POST
+ * @param {*} url 
+ * @param {*} data 
+ * @param {*} callback 
+ */
 const post = (url, data, callback) =>
 	$.post(
 		url,
@@ -25,6 +35,11 @@ const post = (url, data, callback) =>
 		'json'
 	).fail((oRep) => pushError(oRep.responseJSON && oRep.responseJSON.error));
 
+/**
+ * Requête DELETE
+ * @param {*} url 
+ * @param {*} callback 
+ */
 const del = (url, callback) =>
 	$.ajax(url, { method: 'delete' })
 		.done((oRep) => callback())

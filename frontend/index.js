@@ -1,9 +1,7 @@
-import NotificationCenter, { Types } from '_services/notifications';
-import Api from '_services/api';
-import History from '_services/history';
-
+// On importe le CSS de base du projet
 import './index.css';
 
+// On importe les différents composants du projet
 import 'notifications/notifications';
 import 'toolbar/toolbar';
 import 'article/article';

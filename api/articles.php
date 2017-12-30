@@ -2,6 +2,11 @@
 
 $method = $_SERVER["REQUEST_METHOD"];
 
+/**
+ * Récupère les articles en base ainsi que les 200 premiers caractères 
+ * de son contenuqui leurs sont associés, en les ordonnant par date de
+ * création
+ */
 function findAll () {
   return jsonArray(execute("
     SELECT articles.id, title, creation_date, CONCAT(LEFT(GROUP_CONCAT(paragraphes.content SEPARATOR '\n'), 200), '...') as summary, COUNT(paragraphes.id) as nb_paragraphes
@@ -12,6 +17,14 @@ function findAll () {
   "));
 }
 
+/**
+ * Récupère les articles en base ainsi que les 200 premiers caractères 
+ * de son contenuqui leurs sont associés, en les ordonnant par date de
+ * création
+ * 
+ * Le paramètre $query permet de filtrer les articles en fonction de leur
+ * titre
+ */
 function findAllWithFilter ($query) {
   return jsonArray(execute("
     SELECT articles.id, title, creation_date, CONCAT(LEFT(GROUP_CONCAT(paragraphes.content SEPARATOR '\n'), 200), '...') as summary, COUNT(paragraphes.id) as nb_paragraphes
@@ -24,6 +37,10 @@ function findAllWithFilter ($query) {
   ));
 }
 
+/**
+ * Permet de traiter une liste de lignes SQL correspondant à un article
+ * et un de ses paragraphes pour renvoyer une liste de paragraphes
+ */
 function pReduce($acc, $row) {
   if ($row["p_id"]) $acc[] = array(
     "id" => $row["p_id"],
@@ -35,6 +52,9 @@ function pReduce($acc, $row) {
   return $acc;
 }
 
+/**
+ * Récupère un article à partir de son ID ainsi que les paragraphes associés
+ */
 function findById ($id) {
   $rows = jsonArray(execute("
     SELECT 
@@ -56,23 +76,37 @@ function findById ($id) {
   );
 }
 
+/**
+ * Modifie les détails d'un article
+ */
 function update ($id, $doc) {
   execute("UPDATE articles SET title = :title WHERE id = :id", array("title" => $doc->title, "id" => $id));
   return findById($id);
 }
 
+/**
+ * Ajoute un nouvel article
+ */
 function insert ($doc) {
   $id = executeWithId("INSERT INTO articles (title, creation_date) VALUES (:title, NOW())", array("title" => $doc->title));
   return findById($id);
 }
 
+/**
+ * Supprime un article
+ */
 function delete ($id) {
   return execute("DELETE FROM articles WHERE id = :id", array("id" => $id));
 }
 
+/**
+ * Méthode principale de l'API articles, prenant en paramètre la méthode
+ * de requête (GET, POST, DELETE), et appelant les méthodes SQL
+ */
 function articles($method, $id) {
   try {
     switch ($method) {
+      // Récupération d'un article ou d'une liste d'articles
       case "GET":
         if (isset($id)) {
           $doc = findById($id);
@@ -84,6 +118,7 @@ function articles($method, $id) {
         else $response["data"] = findAll();
         break;
         
+      // Modification ou ajout d'un article
       case "POST":
         $doc = json_decode(file_get_contents("php://input"));
         if (isset($id)) {
@@ -97,6 +132,7 @@ function articles($method, $id) {
         }
         break;
       
+      // Suppression d'un article
       case "DELETE":
         $response["data"] = [];
         if (isset($id)) {
@@ -105,6 +141,8 @@ function articles($method, $id) {
         break;
     }
   } catch (Exception $e) {
+    // En cas d'erreur, on renvoit un code erreur adapté avec le message
+    // d'erreur obtenu
     http_response_code(500);
     $response["error"] = $e->getMessage();
   }

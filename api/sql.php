@@ -1,6 +1,18 @@
 <?php
+
+/**
+ * Méthodes d'abstraction pour l'exécution des requêtes SQL
+ */
+
 include "config.php"; 
 
+/**
+ * Permet d'exécuter une requête SQL à partir d'une chaîne de caractères
+ * et d'un tableau associatif de paramètres représentant les données
+ * utilisateur à manipuler (permet d'éviter les injections SQL).
+ * 
+ * Renvoie la requête exécutée
+ */
 function execute($query, $parameters = array()) {
   global $BDD_host;
   global $BDD_base;
@@ -23,6 +35,14 @@ function execute($query, $parameters = array()) {
   return $query;
 }
 
+/**
+ * Permet d'exécuter une requête SQL à partir d'une chaîne de caractères
+ * et d'un tableau associatif de paramètres représentant les données
+ * utilisateur à manipuler (permet d'éviter les injections SQL).
+ * 
+ * Renvoie le dernier ID inséré dans la base de données (utile pour 
+ * l'insertion de nouvelles lignes)
+ */
 function executeWithId($query, $parameters = array()) {
   global $BDD_host;
   global $BDD_base;
@@ -39,6 +59,9 @@ function executeWithId($query, $parameters = array()) {
   return $dbh->lastInsertId();
 }
 
+/**
+ * Renvoie une liste de résultat à partir d'une requête exécutée
+ */
 function jsonArray($result) {
   $result->setFetchMode(PDO::FETCH_ASSOC);
   $collection = [];
@@ -49,6 +72,10 @@ function jsonArray($result) {
 	return $collection;
 }
 
+/**
+ * Renvoie un résultat unique sous forme d'objet à partir d'une requête
+ * exécutée
+ */
 function jsonObject($result) {
   return $result->fetch(PDO::FETCH_ASSOC);
 }
