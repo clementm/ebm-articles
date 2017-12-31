@@ -1,9 +1,13 @@
 const path = require('path');
+const env = process.env.NODE_ENV;
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	entry: './frontend/index.js',
 	output: {
-		filename: 'bundle.js'
+		filename: 'bundle.js',
+		path: path.join(__dirname, './public')
 	},
 	resolve: {
 		modules: [ path.resolve('./node_modules'), path.resolve('./frontend') ]
@@ -12,7 +16,13 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/,
-				use: [ 'style-loader', 'css-loader' ]
+				use:
+					env === 'production'
+						? ExtractTextPlugin.extract({
+								fallback: 'style-loader',
+								use: [ 'css-loader' ]
+							})
+						: [ 'style-loader', 'css-loader' ]
 			},
 			{
 				test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
@@ -33,7 +43,16 @@ module.exports = {
 			}
 		]
 	},
+	plugins:
+		env === 'production'
+			? [
+					new ExtractTextPlugin({
+						filename: 'bundle.css'
+					})
+				]
+			: [],
 	devServer: {
+		contentBase: path.join(__dirname, 'public'),
 		historyApiFallback: true,
 		proxy: {
 			'/api': {
