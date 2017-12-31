@@ -1,5 +1,7 @@
 # EBM 2017/2018 - Devoir final
 
+*Auteur : Clément Michel*
+
 Avant toute chose, bonne année 2018 ! :)
 
 Une démonstration du projet est disponible ici : http://ebm.clementmichel.ovh/
