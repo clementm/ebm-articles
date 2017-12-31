@@ -42,9 +42,9 @@ L'API du projet est donc structurée à la manière d'une API Rest, les routes �
   - `GET` : liste des articles
     
     Exemple de réponse : 
-    ```json
+    ```js
     {
-      data: [
+      "data": [
         {
           id: 29,
           title: "Mon article",
@@ -68,7 +68,7 @@ L'API du projet est donc structurée à la manière d'une API Rest, les routes �
   - `GET` : récupération d'un article
     
     Exemple de réponse : 
-    ```json
+    ```js
     {
       data: {
         id: 29,
@@ -103,7 +103,7 @@ L'API du projet est donc structurée à la manière d'une API Rest, les routes �
   - `GET` : liste des paragraphes
 
     Exemple de réponse :
-    ```json
+    ```js
     {
       data: [
         {
@@ -137,7 +137,7 @@ L'API du projet est donc structurée à la manière d'une API Rest, les routes �
 - `/paragraphes/:id` :
   - `GET` : récupération d'un paragraphe
     Exemple de réponse :
-    ```json
+    ```js
     {
       data: {
         id: 46,
